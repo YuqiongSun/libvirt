@@ -1247,6 +1247,7 @@
     <function name="virConnectNumOfStoragePools ()" link="libvirt-libvirt-storage.html#virConnectNumOfStoragePools"/>
     <function name="virConnectOpen ()" link="libvirt-libvirt-host.html#virConnectOpen"/>
     <function name="virConnectOpenAuth ()" link="libvirt-libvirt-host.html#virConnectOpenAuth"/>
+    <function name="virConnectOpenLabel ()" link="libvirt-libvirt-host.html#virConnectOpenLabel"/>
     <function name="virConnectOpenReadOnly ()" link="libvirt-libvirt-host.html#virConnectOpenReadOnly"/>
     <function name="virConnectRef ()" link="libvirt-libvirt-host.html#virConnectRef"/>
     <function name="virConnectRegisterCloseCallback ()" link="libvirt-libvirt-host.html#virConnectRegisterCloseCallback"/>

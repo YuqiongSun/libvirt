@@ -716,11 +716,14 @@ VBOX_DRIVER_EXTRA_DIST =					\
 		vbox/vbox_MSCOMGlue.c vbox/vbox_MSCOMGlue.h	\
 		vbox/vbox_XPCOMCGlue.c vbox/vbox_XPCOMCGlue.h
 
+# Modified by Yuqiong
+# Add qemu_debug.c qemu_debug.h
 QEMU_DRIVER_SOURCES =							\
 		qemu/qemu_agent.c qemu/qemu_agent.h			\
 		qemu/qemu_capabilities.c qemu/qemu_capabilities.h	\
 		qemu/qemu_command.c qemu/qemu_command.h			\
 		qemu/qemu_domain.c qemu/qemu_domain.h			\
+		qemu/qemu_debug.c qemu/qemu_debug.h			\
 		qemu/qemu_cgroup.c qemu/qemu_cgroup.h			\
 		qemu/qemu_hostdev.c qemu/qemu_hostdev.h			\
 		qemu/qemu_hotplug.c qemu/qemu_hotplug.h			\

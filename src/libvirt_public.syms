@@ -693,6 +693,14 @@ LIBVIRT_1.2.11 {
 LIBVIRT_1.2.12 {
     global:
         virDomainDefineXMLFlags;
+	virConnectOpenLabel;
 } LIBVIRT_1.2.11;
 
+#LIBVIRT_1.2.13 {
+#    global:
+#	virConnectOpenLabel;
+#} LIBVIRT_1.2.11
+
 # .... define new API here using predicted next version number ....
+#
+

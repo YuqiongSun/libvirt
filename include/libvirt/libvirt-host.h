@@ -729,6 +729,8 @@ int                     virGetVersion           (unsigned long *libVer,
 int                     virInitialize           (void);
 
 virConnectPtr           virConnectOpen          (const char *name);
+// SYQ
+virConnectPtr		virConnectOpenLabel	(const char *name, const char *label, int len);
 virConnectPtr           virConnectOpenReadOnly  (const char *name);
 virConnectPtr           virConnectOpenAuth      (const char *name,
                                                  virConnectAuthPtr auth,

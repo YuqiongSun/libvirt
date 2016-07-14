@@ -22,6 +22,10 @@
 
 #include <config.h>
 
+// SYQ
+#include <sys/socket.h>
+#include <fcntl.h>
+
 #include "virerror.h"
 
 #include "remote.h"
@@ -53,6 +57,14 @@
 #include "virpolkit.h"
 
 #define VIR_FROM_THIS VIR_FROM_RPC
+
+// SYQ
+#ifndef SO_PEERSEC
+#define SO_PEERSEC 31
+#endif
+
+#define MAX_LABEL_SIZE 300
+
 
 VIR_LOG_INIT("daemon.remote");
 
@@ -131,6 +143,10 @@ remoteDispatchObjectEventSend(virNetServerClientPtr client,
                               int procnr,
                               xdrproc_t proc,
                               void *data);
+
+// SYQ
+static int remoteGetPeerLabel(int fd, char* label);
+
 
 static void
 remoteEventCallbackFree(void *opaque)
@@ -1248,6 +1264,38 @@ void *remoteClientInitHook(virNetServerClientPtr client,
     return priv;
 }
 
+
+// SYQ
+static int remoteGetPeerLabel(int fd, char* label) {
+    char *buf;
+    socklen_t size;
+    ssize_t ret;
+    size = MAX_LABEL_SIZE;
+    buf = malloc(size);
+    if (!buf)
+	return -1;
+    memset(buf, 0, size);
+    ret = getsockopt(fd, SOL_SOCKET, SO_PEERSEC, buf, &size);
+    if (ret < 0 && errno == ERANGE) {
+	char *newbuf;
+	newbuf = realloc(buf, size);
+	if (!newbuf)
+	    goto out;
+	buf = newbuf;
+	memset(buf, 0, size);
+	ret = getsockopt(fd, SOL_SOCKET, SO_PEERSEC, buf, &size);
+    }
+out:
+    if (ret >= 0) {
+	memcpy(label, buf, size);
+	ret = size;
+    }
+    free(buf);
+    //printf("getpeercon return : %d\n", errno);
+    return ret;
+}
+
+
 /*----- Functions. -----*/
 
 static int
@@ -1261,6 +1309,10 @@ remoteDispatchConnectOpen(virNetServerPtr server,
     unsigned int flags;
     struct daemonClientPrivate *priv = virNetServerClientGetPrivateData(client);
     int rv = -1;
+    // SYQ
+    char label[MAX_LABEL_SIZE];
+    int len;
+    int fd = virNetServerClientGetFD(client);
 
     VIR_DEBUG("priv=%p conn=%p", priv, priv->conn);
     virMutexLock(&priv->lock);
@@ -1277,6 +1329,18 @@ remoteDispatchConnectOpen(virNetServerPtr server,
     }
 
     name = args->name ? *args->name : NULL;
+    
+    /*
+    * SYQ: virConnectOpenLabel(name, label);
+    */
+    memset(label, 0, MAX_LABEL_SIZE);
+    len = remoteGetPeerLabel(fd, label);
+    if (len < 0) {
+	VIR_WARN("SYQ: get label error");
+    } else {
+    	VIR_WARN("SYQ: label is %s", label);
+    }
+
 
     /* If this connection arrived on a readonly socket, force
      * the connection to be readonly.
@@ -1288,7 +1352,13 @@ remoteDispatchConnectOpen(virNetServerPtr server,
     priv->conn =
         flags & VIR_CONNECT_RO
         ? virConnectOpenReadOnly(name)
+        : virConnectOpenLabel(name, label, len);
+/*
+    priv->conn =
+        flags & VIR_CONNECT_RO
+        ? virConnectOpenReadOnly(name)
         : virConnectOpen(name);
+*/
 
     if (priv->conn == NULL)
         goto cleanup;

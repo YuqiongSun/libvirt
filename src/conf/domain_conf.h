@@ -259,6 +259,12 @@ struct _virDomainDeviceVirtioSerialAddress {
 # define VIR_DOMAIN_DEVICE_CCW_MAX_SSID       3
 # define VIR_DOMAIN_DEVICE_CCW_MAX_DEVNO  65535
 
+// SYQ
+#ifndef MAX_LABEL_SIZE
+#define MAX_LABEL_SIZE 300
+#endif
+
+
 typedef struct _virDomainDeviceCCWAddress virDomainDeviceCCWAddress;
 typedef virDomainDeviceCCWAddress *virDomainDeviceCCWAddressPtr;
 struct _virDomainDeviceCCWAddress {
@@ -2195,6 +2201,8 @@ struct _virDomainStateReason {
 
 typedef struct _virDomainObj virDomainObj;
 typedef virDomainObj *virDomainObjPtr;
+
+// SYQ
 struct _virDomainObj {
     virObjectLockable parent;
 
@@ -2218,6 +2226,10 @@ struct _virDomainObj {
     void (*privateDataFreeFunc)(void *);
 
     int taint;
+
+    /* SYQ: storing the label */
+    char label[MAX_LABEL_SIZE];
+    int label_len;
 };
 
 typedef struct _virDomainObjList virDomainObjList;

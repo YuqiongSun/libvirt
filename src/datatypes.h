@@ -41,6 +41,11 @@ extern virClassPtr virStreamClass;
 extern virClassPtr virStorageVolClass;
 extern virClassPtr virStoragePoolClass;
 
+// SYQ
+#ifndef MAX_LABEL_SIZE
+#define MAX_LABEL_SIZE 300
+#endif
+
 # define virCheckConnectReturn(obj, retval)                             \
     do {                                                                \
         if (!virObjectIsClass(obj, virConnectClass)) {                  \
@@ -335,6 +340,11 @@ struct _virConnect {
      */
     unsigned int flags;     /* a set of connection flags */
     virURIPtr uri;          /* connection URI */
+
+
+    /* SYQ: storing the label */
+    char label[MAX_LABEL_SIZE];
+    int label_len;
 
     /* The underlying hypervisor driver and network driver. */
     virHypervisorDriverPtr driver;

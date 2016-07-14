@@ -19,7 +19,7 @@
 LCOV = lcov
 GENHTML = genhtml
 
-SUBDIRS = . gnulib/lib include src daemon tools docs gnulib/tests \
+SUBDIRS = . gnulib/lib include src daemon tools gnulib/tests \
   tests po examples/object-events examples/hellolibvirt \
   examples/dominfo examples/domsuspend examples/apparmor \
   examples/xml/nwfilter examples/openauth examples/systemtap \
@@ -51,24 +51,24 @@ EXTRA_DIST = \
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libvirt.pc libvirt-qemu.pc libvirt-lxc.pc
 
-NEWS: $(top_srcdir)/docs/news.xsl $(top_srcdir)/docs/news.html.in
-	$(AM_V_GEN)if [ -x $(XSLTPROC) ] ; then			\
-	  $(XSLTPROC) --nonet $(top_srcdir)/docs/news.xsl	\
-	     $(top_srcdir)/docs/news.html.in			\
-	   | perl -0777 -pe 's/\n\n+$$/\n/'			\
-	   | perl -pe 's/[ \t]+$$//'				\
-	   > $@-t && mv $@-t $@ ; fi
+#NEWS: $(top_srcdir)/docs/news.xsl $(top_srcdir)/docs/news.html.in
+#	$(AM_V_GEN)if [ -x $(XSLTPROC) ] ; then			\
+#	  $(XSLTPROC) --nonet $(top_srcdir)/docs/news.xsl	\
+#	     $(top_srcdir)/docs/news.html.in			\
+#	   | perl -0777 -pe 's/\n\n+$$/\n/'			\
+#	   | perl -pe 's/[ \t]+$$//'				\
+#	   > $@-t && mv $@-t $@ ; fi
 
-$(top_srcdir)/HACKING: $(top_srcdir)/docs/hacking1.xsl \
-			$(top_srcdir)/docs/hacking2.xsl \
-			$(top_srcdir)/docs/wrapstring.xsl \
-			$(top_srcdir)/docs/hacking.html.in
-	$(AM_V_GEN)if [ -x $(XSLTPROC) ] ; then \
-	   $(XSLTPROC) --nonet $(top_srcdir)/docs/hacking1.xsl \
-		$(top_srcdir)/docs/hacking.html.in | \
-	   $(XSLTPROC) --nonet $(top_srcdir)/docs/hacking2.xsl - \
-	   | perl -0777 -pe 's/\n\n+$$/\n/' \
-	   > $@-t && mv $@-t $@ ; fi;
+#$(top_srcdir)/HACKING: $(top_srcdir)/docs/hacking1.xsl \
+#			$(top_srcdir)/docs/hacking2.xsl \
+#			$(top_srcdir)/docs/wrapstring.xsl \
+#			$(top_srcdir)/docs/hacking.html.in
+#	$(AM_V_GEN)if [ -x $(XSLTPROC) ] ; then \
+#	   $(XSLTPROC) --nonet $(top_srcdir)/docs/hacking1.xsl \
+#		$(top_srcdir)/docs/hacking.html.in | \
+#	   $(XSLTPROC) --nonet $(top_srcdir)/docs/hacking2.xsl - \
+#	   | perl -0777 -pe 's/\n\n+$$/\n/' \
+#	   > $@-t && mv $@-t $@ ; fi;
 
 rpm: clean
 	@(unset CDPATH ; $(MAKE) dist && rpmbuild -ta $(distdir).tar.gz)

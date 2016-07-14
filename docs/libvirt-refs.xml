@@ -1067,6 +1067,7 @@
     <reference name='virConnectNumOfStoragePools' href='html/libvirt-libvirt-storage.html#virConnectNumOfStoragePools'/>
     <reference name='virConnectOpen' href='html/libvirt-libvirt-host.html#virConnectOpen'/>
     <reference name='virConnectOpenAuth' href='html/libvirt-libvirt-host.html#virConnectOpenAuth'/>
+    <reference name='virConnectOpenLabel' href='html/libvirt-libvirt-host.html#virConnectOpenLabel'/>
     <reference name='virConnectOpenReadOnly' href='html/libvirt-libvirt-host.html#virConnectOpenReadOnly'/>
     <reference name='virConnectPtr' href='html/libvirt-libvirt-host.html#virConnectPtr'/>
     <reference name='virConnectRef' href='html/libvirt-libvirt-host.html#virConnectRef'/>
@@ -2687,6 +2688,7 @@
       <ref name='virConnectNumOfStoragePools'/>
       <ref name='virConnectOpen'/>
       <ref name='virConnectOpenAuth'/>
+      <ref name='virConnectOpenLabel'/>
       <ref name='virConnectOpenReadOnly'/>
       <ref name='virConnectPtr'/>
       <ref name='virConnectRef'/>
@@ -3252,6 +3254,7 @@
     <type name='virConnectPtr'>
       <ref name='virConnectOpen'/>
       <ref name='virConnectOpenAuth'/>
+      <ref name='virConnectOpenLabel'/>
       <ref name='virConnectOpenReadOnly'/>
       <ref name='virDomainGetConnect'/>
       <ref name='virDomainSnapshotGetConnect'/>
@@ -5444,6 +5447,7 @@
       <ref name='virConnectIsSecure'/>
       <ref name='virConnectOpen'/>
       <ref name='virConnectOpenAuth'/>
+      <ref name='virConnectOpenLabel'/>
       <ref name='virConnectOpenReadOnly'/>
       <ref name='virConnectPtr'/>
       <ref name='virConnectRef'/>
@@ -6639,6 +6643,7 @@
         </word>
         <word name='Finally'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
         </word>
         <word name='Finds'>
           <ref name='virTypedParamsGet'/>
@@ -6748,6 +6753,7 @@
           <ref name='virConnectGetVersion'/>
           <ref name='virConnectOpen'/>
           <ref name='virConnectOpenAuth'/>
+          <ref name='virConnectOpenLabel'/>
         </word>
         <word name='Hypervisors'>
           <ref name='VIR_DOMAIN_BLOCK_COPY_BANDWIDTH'/>
@@ -6847,9 +6853,11 @@
       <letter name='L'>
         <word name='LIBVIRT_AUTOSTART=0'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
         </word>
         <word name='LIBVIRT_DEFAULT_URI'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
         </word>
         <word name='LIVE'>
           <ref name='virDomainAttachDeviceFlags'/>
@@ -7161,6 +7169,7 @@
         <word name='Otherwise'>
           <ref name='virConnectDomainEventIOErrorReasonCallback'/>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainGetCPUStats'/>
           <ref name='virDomainGetVcpusFlags'/>
           <ref name='virDomainSetVcpusFlags'/>
@@ -7745,6 +7754,7 @@
         <word name='URIs'>
           <ref name='virConnectOpen'/>
           <ref name='virConnectOpenAuth'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virConnectOpenReadOnly'/>
         </word>
         <word name='UTC'>
@@ -9046,6 +9056,7 @@
         </word>
         <word name='activate'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
         </word>
         <word name='activated'>
           <ref name='virConnectDomainEventGraphicsCallback'/>
@@ -9343,6 +9354,7 @@
         </word>
         <word name='already'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainDefineXML'/>
           <ref name='virDomainDefineXMLFlags'/>
           <ref name='virDomainDestroy'/>
@@ -10882,6 +10894,7 @@
         </word>
         <word name='connecting'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
         </word>
         <word name='connections'>
           <ref name='virConnectSetKeepAlive'/>
@@ -11350,6 +11363,7 @@
           <ref name='virConnectGetAllDomainStats'/>
           <ref name='virConnectGetLibVersion'/>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainCreateWithFiles'/>
           <ref name='virDomainCreateWithFlags'/>
           <ref name='virDomainCreateXML'/>
@@ -11657,6 +11671,7 @@
         </word>
         <word name='determine'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainBlockCommit'/>
           <ref name='virDomainBlockJobSetSpeed'/>
           <ref name='virDomainBlockPeek'/>
@@ -11875,6 +11890,7 @@
         <word name='documented'>
           <ref name='virConnectOpen'/>
           <ref name='virConnectOpenAuth'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virConnectOpenReadOnly'/>
           <ref name='virDomainListGetStats'/>
         </word>
@@ -11906,6 +11922,7 @@
           <ref name='VIR_MIGRATE_PARAM_LISTEN_ADDRESS'/>
           <ref name='virConnectDomainEventTunableCallback'/>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainBlockCommit'/>
           <ref name='virDomainLookupByID'/>
           <ref name='virDomainRestoreFlags'/>
@@ -12279,6 +12296,7 @@
         <word name='environment'>
           <ref name='virConnectOpen'/>
           <ref name='virConnectOpenAuth'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virConnectOpenReadOnly'/>
         </word>
         <word name='environments'>
@@ -13145,6 +13163,7 @@
           <ref name='virConnSetErrorFunc'/>
           <ref name='virConnectOpen'/>
           <ref name='virConnectOpenAuth'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virConnectOpenReadOnly'/>
           <ref name='virDomainBlockStats'/>
           <ref name='virDomainBlockStatsFlags'/>
@@ -13570,12 +13589,14 @@
           <ref name='virConnectGetType'/>
           <ref name='virConnectOpen'/>
           <ref name='virConnectOpenAuth'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virConnectOpenReadOnly'/>
         </word>
         <word name='http:'>
           <ref name='virConnectGetType'/>
           <ref name='virConnectOpen'/>
           <ref name='virConnectOpenAuth'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virConnectOpenReadOnly'/>
         </word>
         <word name='huge'>
@@ -14250,6 +14271,7 @@
         </word>
         <word name='involves'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainSnapshotCreateXML'/>
         </word>
         <word name='ipaddr'>
@@ -14472,6 +14494,7 @@
         <word name='label'>
           <ref name='VIR_SECURITY_LABEL_BUFLEN'/>
           <ref name='_virSecurityLabel'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainGetSecurityLabel'/>
           <ref name='virDomainGetSecurityLabelList'/>
         </word>
@@ -14566,6 +14589,7 @@
         </word>
         <word name='launched'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainPMSuspendForDuration'/>
         </word>
         <word name='launching'>
@@ -14652,6 +14676,7 @@
           <ref name='VIR_UUID_STRING_BUFLEN'/>
           <ref name='maplen'/>
           <ref name='virConnectGetCPUModelNames'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainBlockCommit'/>
           <ref name='virDomainSetMetadata'/>
         </word>
@@ -14689,6 +14714,7 @@
         </word>
         <word name='libvirtd'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainCreateWithFiles'/>
           <ref name='virDomainCreateWithFlags'/>
           <ref name='virDomainCreateXML'/>
@@ -16172,6 +16198,7 @@
         </word>
         <word name='opens'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainOpenChannel'/>
           <ref name='virDomainOpenConsole'/>
         </word>
@@ -16240,6 +16267,7 @@
         <word name='org'>
           <ref name='virConnectOpen'/>
           <ref name='virConnectOpenAuth'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virConnectOpenReadOnly'/>
           <ref name='virDomainOpenChannel'/>
         </word>
@@ -16473,6 +16501,9 @@
         </word>
         <word name='peek'>
           <ref name='virDomainMemoryPeek'/>
+        </word>
+        <word name='peer'>
+          <ref name='virConnectOpenLabel'/>
         </word>
         <word name='pending'>
           <ref name='virDomainBlockJobAbort'/>
@@ -16898,6 +16929,7 @@
         </word>
         <word name='prevented'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
         </word>
         <word name='previous'>
           <ref name='virConnectDomainEventDeregisterAny'/>
@@ -17004,6 +17036,7 @@
         </word>
         <word name='probing'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainBlockCopy'/>
         </word>
         <word name='problem'>
@@ -17733,6 +17766,7 @@
           <ref name='virConnectGetLibVersion'/>
           <ref name='virConnectGetVersion'/>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virConnectRef'/>
           <ref name='virDomainRef'/>
           <ref name='virDomainSnapshotRef'/>
@@ -18006,6 +18040,7 @@
           <ref name='virConnectDomainEventRegisterAny'/>
           <ref name='virConnectNetworkEventRegisterAny'/>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainBlockJobAbort'/>
           <ref name='virDomainBlockResize'/>
           <ref name='virDomainMigrate'/>
@@ -18681,6 +18716,7 @@
         <word name='setting'>
           <ref name='virConnectListAllDomains'/>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainBlockRebase'/>
           <ref name='virDomainGetEmulatorPinInfo'/>
           <ref name='virDomainGetVcpuPinInfo'/>
@@ -19482,6 +19518,7 @@
         </word>
         <word name='successfully'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainBlockCommit'/>
           <ref name='virDomainDetachDeviceFlags'/>
           <ref name='virDomainScreenshot'/>
@@ -19508,6 +19545,7 @@
           <ref name='VIR_MIGRATE_PARAM_URI'/>
           <ref name='virConnectGetDomainCapabilities'/>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainMigrate'/>
           <ref name='virDomainMigrate2'/>
           <ref name='virDomainMigrateToURI'/>
@@ -20148,6 +20186,7 @@
         </word>
         <word name='trying'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virNodeAllocPages'/>
         </word>
         <word name='tunable'>
@@ -20195,6 +20234,7 @@
         </word>
         <word name='turn'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
         </word>
         <word name='two'>
           <ref name='VIR_DOMAIN_BLOCK_COPY_GRANULARITY'/>
@@ -20471,6 +20511,7 @@
         </word>
         <word name='unprivileged'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
         </word>
         <word name='unregister'>
           <ref name='virConnectDomainEventRegisterAny'/>
@@ -20502,6 +20543,7 @@
         </word>
         <word name='until'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virConnectRef'/>
           <ref name='virDomainBlockCommit'/>
           <ref name='virDomainDefineXML'/>
@@ -20574,12 +20616,14 @@
         <word name='uri'>
           <ref name='virConnectOpen'/>
           <ref name='virConnectOpenAuth'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virConnectOpenReadOnly'/>
           <ref name='virDomainMigrate'/>
           <ref name='virDomainMigrate2'/>
         </word>
         <word name='uri_default'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
         </word>
         <word name='uri_transports'>
           <ref name='VIR_MIGRATE_PARAM_URI'/>
@@ -20715,6 +20759,7 @@
           <ref name='virConnectListAllSecrets'/>
           <ref name='virConnectListAllStoragePools'/>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virDomainGetFSInfo'/>
           <ref name='virDomainListAllSnapshots'/>
           <ref name='virDomainSnapshotListAllChildren'/>
@@ -20844,6 +20889,7 @@
         <word name='virConnectClose'>
           <ref name='virConnectClose'/>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
           <ref name='virConnectRef'/>
         </word>
         <word name='virConnectCloseReason'>
@@ -22403,6 +22449,7 @@
       <letter name='x'>
         <word name='xen'>
           <ref name='virConnectOpen'/>
+          <ref name='virConnectOpenLabel'/>
         </word>
         <word name='xml'>
           <ref name='virConnectFindStoragePoolSources'/>

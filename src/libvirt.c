@@ -1323,6 +1323,56 @@ virConnectOpen(const char *name)
     return NULL;
 }
 
+/**
+ * virConnectOpenLabel:
+ * @name: (optional) URI of the hypervisor
+ * @label: label of the connecting peer
+ * @len: label length
+ *
+ * This function should be called first to get a connection to the
+ * Hypervisor and xen store
+ *
+ * If @name is NULL, if the LIBVIRT_DEFAULT_URI environment variable is set,
+ * then it will be used. Otherwise if the client configuration file
+ * has the "uri_default" parameter set, then it will be used. Finally
+ * probing will be done to determine a suitable default driver to activate.
+ * This involves trying each hypervisor in turn until one successfully opens.
+ *
+ * If connecting to an unprivileged hypervisor driver which requires
+ * the libvirtd daemon to be active, it will automatically be launched
+ * if not already running. This can be prevented by setting the
+ * environment variable LIBVIRT_AUTOSTART=0
+ *
+ * URIs are documented at http://libvirt.org/uri.html
+ *
+ * virConnectClose should be used to release the resources after the connection
+ * is no longer needed.
+ *
+ * Returns a pointer to the hypervisor connection or NULL in case of error
+ */
+virConnectPtr
+virConnectOpenLabel(const char *name, const char *label, int len) {
+
+    virConnectPtr ret = NULL;
+
+    if (virInitialize() < 0)
+        goto error;
+
+    VIR_DEBUG("name=%s", NULLSTR(name));
+    virResetLastError();
+    ret = do_open(name, NULL, 0);
+    if (!ret)
+        goto error;
+    // SYQ
+    memcpy(ret->label, label, len);
+    ret->label_len = len;
+
+    return ret;
+
+ error:
+    virDispatchError(NULL);
+    return NULL;
+}
 
 /**
  * virConnectOpenReadOnly:

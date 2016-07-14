@@ -55,6 +55,7 @@
 #include "qemu_monitor.h"
 #include "qemu_process.h"
 #include "qemu_migration.h"
+#include "qemu_debug.h"
 
 #include "virerror.h"
 #include "virlog.h"
@@ -172,6 +173,10 @@ static int qemuOpenFileAs(uid_t fallback_uid, gid_t fallback_gid,
                           bool *needUnlink, bool *bypassSecurityDriver);
 
 
+// SYQ
+static void virDomainSetLabel(virConnectPtr conn, virDomainObjPtr vm);
+static bool virDomainCheckLabel(virConnectPtr conn, virDomainObjPtr vm);
+
 virQEMUDriverPtr qemu_driver = NULL;
 
 
@@ -201,6 +206,49 @@ struct qemuAutostartData {
     virConnectPtr conn;
 };
 
+/**
+ * virDomainObjPtr
+ * @conn: connection pointer
+ * @vm: domain pointer
+ *
+ * This function sets up the label for @vm using the label from @conn
+ * 
+ * Modified by SYQ
+ *
+ * Returns nothing
+ */
+static void 
+virDomainSetLabel(virConnectPtr conn, virDomainObjPtr vm) {
+	memset(vm->label, 0, MAX_LABEL_SIZE);
+	memcpy(vm->label, conn->label, conn->label_len);
+	vm->label_len = conn->label_len;
+}
+
+/**
+ * virDomainCheckLabel
+ * @conn: connection pointer
+ * @vm: domain pointer
+ *
+ * This function checks if the connection can operate over the VM
+ *
+ * Modified by Yuqiong
+ *
+ * Returns check result
+ */
+static bool
+virDomainCheckLabel(virConnectPtr conn, virDomainObjPtr vm) {
+	VIR_WARN("SYQ: Connection label:%s; VM label:%s", conn->label, vm->label);
+	if (conn->label_len != vm->label_len) {
+		VIR_WARN("SYQ: Label lengthes do not match");
+		return false;
+	}
+
+	if (strncmp(conn->label, vm->label, vm->label_len) != 0) {
+		VIR_WARN("SYQ: Labels do not match");
+		return false;
+	}
+	return true;
+}
 
 /**
  * qemuDomObjFromDomain:
@@ -1720,6 +1768,9 @@ static virDomainPtr qemuDomainCreateXML(virConnectPtr conn,
     virObjectRef(vm);
     def = NULL;
 
+    // SYQ
+    virDomainSetLabel(conn, vm);
+
     if (qemuDomainObjBeginJob(driver, vm, QEMU_JOB_MODIFY) < 0) {
         qemuDomainRemoveInactive(driver, vm);
         goto cleanup;
@@ -1785,6 +1836,8 @@ static int qemuDomainSuspend(virDomainPtr dom)
 
     if (!(vm = qemuDomObjFromDomain(dom)))
         return -1;
+    // SYQ
+    virDomainCheckLabel(dom->conn, vm);
 
     if (virDomainSuspendEnsureACL(dom->conn, vm->def) < 0)
         goto cleanup;
@@ -1861,6 +1914,9 @@ static int qemuDomainResume(virDomainPtr dom)
 
     if (!(vm = qemuDomObjFromDomain(dom)))
         return -1;
+
+    // SYQ
+    virDomainCheckLabel(dom->conn, vm);
 
     cfg = virQEMUDriverGetConfig(driver);
 
@@ -2025,6 +2081,9 @@ qemuDomainReboot(virDomainPtr dom, unsigned int flags)
     if (!(vm = qemuDomObjFromDomain(dom)))
         goto cleanup;
 
+    //SYQ
+    virDomainCheckLabel(dom->conn, vm);
+
     if (vm->def->onReboot == VIR_DOMAIN_LIFECYCLE_DESTROY ||
         vm->def->onReboot == VIR_DOMAIN_LIFECYCLE_PRESERVE) {
         agentFlag = QEMU_AGENT_SHUTDOWN_POWERDOWN;
@@ -2163,6 +2222,9 @@ qemuDomainDestroyFlags(virDomainPtr dom,
 
     if (!(vm = qemuDomObjFromDomain(dom)))
         return -1;
+
+    // SYQ
+    virDomainCheckLabel(dom->conn, vm);
 
     priv = vm->privateData;
 
@@ -6658,6 +6720,12 @@ qemuDomainCreateWithFlags(virDomainPtr dom, unsigned int flags)
     if (!(vm = qemuDomObjFromDomain(dom)))
         goto cleanup;
 
+    // SYQ
+    //if (!virDomainCheckLabel(dom->conn, vm))
+    //	goto cleanup;
+    //	For now, just log, do not enforce
+    virDomainCheckLabel(dom->conn, vm);
+
     if (virDomainCreateWithFlagsEnsureACL(dom->conn, vm->def) < 0)
         goto cleanup;
 
@@ -6737,6 +6805,9 @@ static virDomainPtr qemuDomainDefineXMLFlags(virConnectPtr conn, const char *xml
                                    driver->xmlopt,
                                    0, &oldDef)))
         goto cleanup;
+
+    // SYQ
+    virDomainSetLabel(conn, vm);
 
     virObjectRef(vm);
     def = NULL;
